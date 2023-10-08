@@ -3,12 +3,14 @@ import React, { createRef } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native';
 import Main from './screens/Main';
+import ProductDetails from './screens/ProductDetails';
 const Stack=createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Main"  component={Main} options={{headerShown : false}}/>
+            <Stack.Screen name="ProductDetails"  component={ProductDetails} options={{headerShown : false}}/>
         </Stack.Navigator>
     </NavigationContainer>
   );

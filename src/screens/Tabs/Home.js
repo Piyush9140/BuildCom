@@ -1,7 +1,8 @@
-import { View, Text ,StyleSheet, FlatList, Dimensions, Image} from 'react-native';
+import { View, Text ,StyleSheet, FlatList, Dimensions, Image, Touchable} from 'react-native';
 import React, { useEffect, useState } from 'react'
 import  Header from '../../common/Header';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = ({}) => {
   const navigation = useNavigation();
@@ -28,7 +29,10 @@ const Home = ({}) => {
       <FlatList data={products}
        renderItem={({item,index})=>{
         return(
-         <View style={styles.productItem}>
+         <TouchableOpacity activeOpacity={1} style={styles.productItem} 
+         onPress={() =>{
+          navigation.navigate('ProductDetails',{data:item});
+         }}>
           <Image source={{uri:item.image}} style={styles.itemImage}/>
           <View>
             <Text style={styles.name}>
@@ -45,7 +49,7 @@ const Home = ({}) => {
                   {'$'+item.price}
             </Text>
           </View>
-         </View>
+         </TouchableOpacity>
         )
       }}
       />
