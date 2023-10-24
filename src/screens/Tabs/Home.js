@@ -11,7 +11,7 @@ const Home = ({}) => {
     getProducts()
   },[])
   const getProducts=()=>{
-    fetch('https://fakestoreapi.com/products')
+    fetch('https://x8ki-letl-twmt.n7.xano.io/api:I-pmUSD6/1')
             .then(res=>res.json())
             .then(json=>{setProducts(json)});
 
