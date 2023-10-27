@@ -3,17 +3,24 @@ import React from 'react'
 import Header from '../common/Header'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import CustomButton from '../common/CustomButton' 
+import { useDispatch } from 'react-redux'
+import { addItemToWishList } from '../Redux/slices/WishlistSlice'
+import { ScrollView } from 'react-native-gesture-handler'
+import { addItemToCart } from '../Redux/slices/CartSlice'
 
 const ProductDetails = () => {
     const navigation=useNavigation()
     const route= useRoute();
+    const dispatch= useDispatch();
   return (
+    
     <View style={styles.container}>
       <Header leftIcon={require('../images/left-arrow.png')}
       RightIcon={require('../images/shopping-bag.png')}
       title={'Product Details '}  
       onClickLeftIcon={()=>{navigation.goBack();
       } }/>
+      
         <Image source={{uri: route.params.data.image}} style={styles.image}/>
         <Text style={styles.title}>{route.params.data.title}</Text>
         <Text style={styles.detail}>{route.params.data.description}</Text>
@@ -21,11 +28,15 @@ const ProductDetails = () => {
         <Text style={[styles.price,{color:'#000'}]}>{'Price: '}</Text>
         <Text style={styles.price}>{'$'+route.params.data.price}</Text>
         </View>
-        <TouchableOpacity style={styles.wishlist}>
+        <TouchableOpacity style={styles.wishlist} onPress={()=>{
+          dispatch(addItemToWishList(route.params.data));
+        }}>
           <Image source={require('../images/heart.png')} style={styles.icon}/>
         </TouchableOpacity>
-        <CustomButton bg={'#FAC000'} title={'Add To Cart'} onClick={()=>{}}/>
-    </View>
+        <CustomButton bg={'#FAC000'} title={'Add To Cart'} onClick={()=>{
+          dispatch(addItemToCart(route.params.data));
+        }}/>
+    </View> 
   )
 }
  
