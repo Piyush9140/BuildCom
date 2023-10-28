@@ -3,7 +3,8 @@ import React, { createRef } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Main from "./screens/Main";
-import ProductDetails from "./screens/ProductDetails";
+import ProductDetails from "./screens/ProductDetails"; 
+import Cart from "./screens/Cart";
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
@@ -17,6 +18,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="ProductDetails"
           component={ProductDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

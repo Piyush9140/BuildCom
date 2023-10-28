@@ -25,8 +25,11 @@ const Home = ({}) => {
     fetch("https://x8ki-letl-twmt.n7.xano.io/api:I-pmUSD6/1")
       .then((res) => res.json())
       .then((json) => {
-        dispatch(addProducts(json));
         setProducts(json);
+        json.map(item=>{
+          item.qty =1;
+        });
+        dispatch(addProducts(json));
       });
   };
   return (
@@ -38,6 +41,7 @@ const Home = ({}) => {
         onClickLeftIcon={() => {
           navigation.openDrawer();
         }}
+        isCart={true}
       />
       <FlatList
         data={products}
