@@ -7,12 +7,25 @@ import { useDispatch } from "react-redux";
 import { addItemToWishList } from "../Redux/slices/WishlistSlice";
 import { ScrollView } from "react-native-gesture-handler";
 import { addItemToCart } from "../Redux/slices/CartSlice";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AskForLoginModal from "../common/AskForLoginModal";
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const dispatch = useDispatch();
   const [qty, setqty] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+  const checkUserStatus = async () => {
+    let isUserLoggedIn = false;
+    const status = await AsyncStorage.getItem("IS_USER_LOGGED_IN");
+    console.log(status);
+    if (status == null) {
+      isUserLoggedIn = false;
+    } else {
+      isUserLoggedIn = true;
+    }
+    return isUserLoggedIn;
+  };
   return (
     <View style={styles.container}>
       <Header
@@ -56,7 +69,11 @@ const ProductDetails = () => {
       <TouchableOpacity
         style={styles.wishlist}
         onPress={() => {
-          dispatch(addItemToWishList(route.params.data));
+          if (checkUserStatus() === true) {
+            dispatch(addItemToWishList(route.params.data));
+          } else {
+            setModalVisible(true);
+          }
         }}
       >
         <Image source={require("../images/heart.png")} style={styles.icon} />
@@ -66,18 +83,36 @@ const ProductDetails = () => {
         title={"Add To Cart"}
         onClick={() => {
           console.log(route.params.data);
-          dispatch(
-            addItemToCart({
-              category:route.params.data.category ,
-              description:route.params.data.description,
-              id: route.params.data.id,
-              image:route.params.data.image,
-              price: route.params.data.price,
-              qty: qty,
-              rating: route.params.data.rating,
-              title: route.params.data.title,
-            }),
-          );
+          if (checkUserStatus() === true) {
+            dispatch(
+              addItemToCart({
+                category: route.params.data.category,
+                description: route.params.data.description,
+                id: route.params.data.id,
+                image: route.params.data.image,
+                price: route.params.data.price,
+                qty: qty,
+                rating: route.params.data.rating,
+                title: route.params.data.title,
+              })
+            );
+          } else {
+            setModalVisible(true);
+          }
+        }}
+      />
+      <AskForLoginModal
+        modalVisible={modalVisible}
+        onClickLogin={() => {
+          setModalVisible(false);
+          navigation.navigate("Login");
+        }}
+        onClose={() => {
+          setModalVisible(false);
+        }}
+        onClickSignup={() => {
+          setModalVisible(false);
+          navigation.navigate("Signup");
         }}
       />
     </View>
