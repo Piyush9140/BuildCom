@@ -66,7 +66,7 @@ const Home = ({}) => {
                     ? item.description.substring(0, 30) + "..."
                     : item.description}
                 </Text>
-                <Text style={styles.price}>{"$" + item.price}</Text>
+                <Text style={styles.price}>{"Rs." + item.price}</Text>
               </View>
             </TouchableOpacity>
           );

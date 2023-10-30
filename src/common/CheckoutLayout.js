@@ -14,7 +14,7 @@ import {
       <View style={styles.container}>
         <View style={styles.tab}>
           <Text>{`(items ${items} )`}</Text>
-          <Text style={styles.total}>{'Total: $' + total}</Text>
+          <Text style={styles.total}>{'Total : Rs.' + total}</Text>
         </View>
         <View style={styles.tab}>
           <TouchableOpacity

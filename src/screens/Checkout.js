@@ -11,6 +11,7 @@ import {
   import React, {useEffect, useState} from 'react';
   import Header from '../common/Header';
   import {
+    useIsFocused,
     useNavigation,
   } from '@react-navigation/native';
   import {useDispatch, useSelector} from 'react-redux';
@@ -21,6 +22,7 @@ import {
     removeItemFromCart,
   } from '../Redux/slices/CartSlice';
   import CustomButton from '../common/CustomButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
   
 
   
@@ -29,6 +31,7 @@ import {
     const items = useSelector(state => state.cart);
     const [cartItems, setCartItems] = useState([]);
     const [selectedMethod, setSelectedMethod] = useState(0);
+    const isFocused=useIsFocused();
     const [selectedAddress, setSelectedAddress] = useState(
       'Please Select Address',
     );
@@ -44,6 +47,11 @@ import {
       });
       return total.toFixed(0);
     };
+    useEffect(()=>{getSelectedAddress();
+    },[isFocused])
+    const getSelectedAddress=async()=>{
+        setSelectedAddress(await AsyncStorage.getItem('MY_ADDRESS'));
+    }
     return (
       <View style={styles.container}>
         <Header
@@ -79,7 +87,7 @@ import {
                           : item.description}
                       </Text>
                       <View style={styles.qtyview}>
-                        <Text style={styles.price}>{'$' + item.price}</Text>
+                        <Text style={styles.price}>{'Rs.' + item.price}</Text>
                         <TouchableOpacity
                           style={styles.btn}
                           onPress={() => {
@@ -109,7 +117,7 @@ import {
           <View style={styles.totalView}>
             <Text style={styles.title}>Total</Text>
             <Text style={[styles.title, {marginRight: 20}]}>
-              {'$' + getTotal()}
+              {'Rs.' + getTotal()}
             </Text>
           </View>
           <Text style={styles.title}>Select Payment Mode</Text>
@@ -187,6 +195,9 @@ import {
           </TouchableOpacity>
           <View style={styles.addressView}>
             <Text style={styles.title}>Address</Text>
+            <Text style={[styles.title,{color:'#0269A0FB',}]} onPress={()=>{
+              navigation.navigate('Addresses');
+            }}>Edit Address</Text>
           </View>
           <Text
             style={[
@@ -197,7 +208,7 @@ import {
           </Text>
           <CustomButton
             bg={'green'}
-            title={''}
+            title={'Pay & Order'}
             color={'#fff'}
           />
         </ScrollView>
@@ -293,5 +304,12 @@ import {
       fontSize: 16,
       color: '#000',
     },
-  
+    addressView:{
+      width:'100%',
+      flexDirection:'row',
+      justifyContent:'space-between',
+      alignItems:'center',
+      paddingLeft:10,
+      paddingRight:20,
+    },
   });

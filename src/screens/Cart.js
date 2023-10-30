@@ -60,7 +60,7 @@ const Cart = () => {
                     : item.description}
                 </Text>
                 <View style={styles.qtyview}>
-                  <Text style={styles.price}>{"$" + item.price}</Text>
+                  <Text style={styles.price}>{"Rs." + item.price}</Text>
                   <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {

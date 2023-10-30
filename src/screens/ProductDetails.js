@@ -43,7 +43,7 @@ const ProductDetails = () => {
       <Text style={styles.detail}>{route.params.data.description}</Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={[styles.price, { color: "#000" }]}>{"Price: "}</Text>
-        <Text style={styles.price}>{"$" + route.params.data.price}</Text>
+        <Text style={styles.price}>{"Rs." + route.params.data.price}</Text>
         <View style={styles.qtyView}>
           <TouchableOpacity
             style={styles.btn}
