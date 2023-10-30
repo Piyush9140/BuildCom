@@ -17,6 +17,7 @@ import {
   reduceItemFromCart,
   removeItemFromCart,
 } from "../Redux/slices/CartSlice";
+import CheckoutLayout from "../common/CheckoutLayout";
 const Cart = () => {
   const items = useSelector((state) => state.cart);
   const navigation = useNavigation();
@@ -25,6 +26,13 @@ const Cart = () => {
   useEffect(() => {
     setCartItems(items.data);
   }, [items]);
+  const getTotal = () => {
+    let total = 0;
+    Cartitems.map(item => {
+      total = total + item.qty * item.price;
+    });
+    return total.toFixed(0);
+  };
   return (
     <View style={styles.container}>
       <Header title={"Cart items"}  isCart={true}/>
@@ -79,7 +87,17 @@ const Cart = () => {
             </TouchableOpacity>
           );
         }}
+
       />
+      {Cartitems.length < 1 && (
+        <View style={styles.noItems}>
+          <Text>No Items in Cart</Text>
+        </View>
+      )}
+      {Cartitems.length > 0 && (
+        <CheckoutLayout items={Cartitems.length} total={getTotal()} />
+      )}
+      
     </View>
   );
 };
@@ -134,5 +152,11 @@ const styles = StyleSheet.create({
   qty: {
     marginLeft: 10,
     fontSize: 18,
+  },
+  noItems: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

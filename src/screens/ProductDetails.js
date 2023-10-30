@@ -83,7 +83,7 @@ const ProductDetails = () => {
         title={"Add To Cart"}
         onClick={() => {
           console.log(route.params.data);
-          if (checkUserStatus() === true) {
+          // if (checkUserStatus() === true) {
             dispatch(
               addItemToCart({
                 category: route.params.data.category,
@@ -96,9 +96,9 @@ const ProductDetails = () => {
                 title: route.params.data.title,
               })
             );
-          } else {
-            setModalVisible(true);
-          }
+          // } else {
+          //   setModalVisible(true);
+          // }
         }}
       />
       <AskForLoginModal
