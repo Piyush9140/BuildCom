@@ -15,6 +15,13 @@
       "**/*"
     ],
     "ios": {
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+           "tez",
+           "phonepe",
+           "paytmmp"
+        ]
+      },
       "supportsTablet": true
     },
     "android": {
@@ -26,5 +33,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }
