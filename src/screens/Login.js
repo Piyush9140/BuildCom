@@ -12,11 +12,9 @@ const Login = () => {
   const [pass, setPass] = useState("");
   const loginUser = () => {
     const db1 = db;
-   
     const citiesRef = collection(db1, "users");
-
     // Create a query against the collection.
-    const q = query(citiesRef, where("email", "==", email));
+    const q = query(citiesRef, where("email" == email));
     console.log(q)
   };
   //   const docRef = doc(db1, "pass", "email");

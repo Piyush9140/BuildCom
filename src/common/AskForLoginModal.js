@@ -9,7 +9,6 @@ import {
   } from 'react-native';
   import React from 'react';
   import CustomButton from './CustomButton';
-  
   const AskForLoginModal = ({
     modalVisible,
     onClickLogin,
