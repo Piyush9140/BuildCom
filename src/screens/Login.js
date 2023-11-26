@@ -3,11 +3,8 @@ import React, { useState } from "react";
 import CustomButton from "../common/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import { doc, getDoc } from "firebase/firestore";
-// import { collection, addDoc } from "firebase/firestore";
 import { collection, query, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-// import firestore from '@react-native-firebase/firestore';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const navigation = useNavigation();

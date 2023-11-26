@@ -23,9 +23,7 @@ import {
   } from '../Redux/slices/CartSlice';
   import CustomButton from '../common/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-  
 
-  
   const Checkout = () => {
     const navigation = useNavigation();
     const items = useSelector(state => state.cart);
@@ -61,7 +59,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             navigation.goBack();
           }}
         />
-        <ScrollView>
           <Text style={styles.title}>Added Items</Text>
           <View>
             <FlatList
@@ -211,7 +208,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             title={'Pay & Order'}
             color={'#fff'}
           />
-        </ScrollView>
       </View>
     );
   };

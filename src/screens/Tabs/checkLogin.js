@@ -2,9 +2,6 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import React, { useState } from "react";
 import { RawButton, TextInput } from "react-native-gesture-handler";
 import { auth1 } from "../../../firebaseConfig";
-// import { initializeApp } from "firebase/app";
-// import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
-// //import { auth} from "../../../firebaseConfig";
 import { auth, createUserWithEmailAndPassword } from "firebase/auth";
 const User = () => {
   const [pass, setpass] = useState("");
