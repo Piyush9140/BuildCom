@@ -226,6 +226,7 @@ const Checkout = () => {
         </Text>
         <View>
           <TouchableHighlight
+          
             onPress={() => {
               var options = {
                 description: "Credits towards consultation",
