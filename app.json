@@ -15,6 +15,13 @@
       "**/*"
     ],
     "ios": {
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+           "tez",
+           "phonepe",
+           "paytmmp"
+        ]
+      },
       "supportsTablet": true
     },
     "android": {
@@ -32,5 +39,6 @@
         "projectId": "38ceee4a-0256-4244-8d8c-52412e7ec89c"
       }
     }
+    
   }
 }
