@@ -28,14 +28,22 @@ const Cart = () => {
   }, [items]);
   const getTotal = () => {
     let total = 0;
-    Cartitems.map(item => {
+    Cartitems.map((item) => {
       total = total + item.qty * item.price;
     });
     return total.toFixed(0);
   };
   return (
     <View style={styles.container}>
-      <Header title={"Cart items"}  isCart={true}/>
+      <Header
+        leftIcon={require("../images/left-arrow.png")}
+        RightIcon={require("../images/shopping-bag.png")}
+        title={"Cart items"}
+        isCart={true}
+        onClickLeftIcon={() => {
+          navigation.goBack();
+        }}
+      />
       <FlatList
         data={Cartitems}
         renderItem={({ item, index }) => {
@@ -87,7 +95,6 @@ const Cart = () => {
             </TouchableOpacity>
           );
         }}
-
       />
       {Cartitems.length < 1 && (
         <View style={styles.noItems}>
@@ -97,7 +104,6 @@ const Cart = () => {
       {Cartitems.length > 0 && (
         <CheckoutLayout items={Cartitems.length} total={getTotal()} />
       )}
-      
     </View>
   );
 };
@@ -154,9 +160,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   noItems: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

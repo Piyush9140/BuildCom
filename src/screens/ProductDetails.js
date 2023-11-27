@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import Header from "../common/Header";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -9,6 +9,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { addItemToCart } from "../Redux/slices/CartSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AskForLoginModal from "../common/AskForLoginModal";
+import Wishlist from "./Tabs/Wishlist";
 const ProductDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
@@ -69,11 +70,12 @@ const ProductDetails = () => {
       <TouchableOpacity
         style={styles.wishlist}
         onPress={() => {
-          if (checkUserStatus() === true) {
+          //if (checkUserStatus() === true) {
             dispatch(addItemToWishList(route.params.data));
-          } else {
-            setModalVisible(true);
-          }
+            Alert.alert("Product Added to Wishlist")
+          //else {
+            //setModalVisible(true);
+          
         }}
       >
         <Image source={require("../images/heart.png")} style={styles.icon} />

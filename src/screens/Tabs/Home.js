@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import { addProducts } from "../../Redux/slices/productsSlice";
+import Header1 from "../../common/Header1";
 
 const Home = ({}) => {
   const navigation = useNavigation();
@@ -34,13 +35,13 @@ const Home = ({}) => {
   };
   return (
     <View style={styles.container}>
-      <Header
-        leftIcon={require("../../images/menu.png")}
+      <Header1
+        // leftIcon={require("../../images/menu.png")}
         RightIcon={require("../../images/shopping-bag.png")}
-        title={"Grocery App"}
-        onClickLeftIcon={() => {
-          navigation.openDrawer();
-        }}
+        title={"BuildCom"}
+        // onClickLeftIcon={() => {
+        //   navigation.openDrawer();
+        // }}
         isCart={true}
       />
       <FlatList

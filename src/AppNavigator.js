@@ -10,6 +10,9 @@ import Signup from "./screens/Signup";
 import Checkout from "./screens/Checkout";
 import Addresses from "./screens/Addresses";
 import AddAddress from "./screens/AddAddress";
+import HomeScreen from "./screens/HomeScreen";
+import Home from "./screens/Tabs/Home";
+import Wishlist from "./screens/Tabs/Wishlist";
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
@@ -18,6 +21,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="Main"
           component={Main}
+          options={{ headerShown: false }}
+        />
+          <Stack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -53,6 +61,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="AddAddress"
           component={AddAddress}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="Wishlist"
+          component={Wishlist}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

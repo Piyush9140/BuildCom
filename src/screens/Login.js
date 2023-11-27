@@ -2,21 +2,55 @@ import { View, Text, StyleSheet, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../common/CustomButton";
 import { useNavigation } from "@react-navigation/native";
-import { doc, getDoc } from "firebase/firestore";
-import { collection, query, where } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+// import { doc, getDoc } from "firebase/firestore";
+// import { collection, query, where } from "firebase/firestore";
+// import { db } from "../../firebaseConfig";
+import {
+  signInWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import Home from "./Tabs/Home";
+import HomeScreen from "./HomeScreen";
+// import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
-const Login = () => {
-  const navigation = useNavigation();
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const loginUser = () => {
-    const db1 = db;
-    const citiesRef = collection(db1, "users");
-    // Create a query against the collection.
-    const q = query(citiesRef, where("email" == email));
-    console.log(q)
+  const [password, setPassword] = useState("");
+  const onHandleLogin = () => {
+    if (email !== "" && password !== "") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          Alert.alert("Login success");
+           navigation.navigate("HomeScreen")
+        })
+        .catch((err) => Alert.alert("Login error", err.message));
+    } else {
+      Alert.alert("Login error");
+      Alert.alert("Please Enter Required Data");
+    }
   };
+  // reset password
+  // const auth = getAuth();
+  // if (email !== "" && password !== ""){
+  // sendPasswordResetEmail(auth, email)
+  //   .then(() => {
+  //     Alert.alert("Please Enter Required Data");
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //   });
+  // };
+  // previous firestore not working code
+  // const loginUser = () => {
+  //   const db1 = db;
+  //   const citiesRef = collection(db1, "users");
+  //   // Create a query against the collection.
+  //   const q = query(citiesRef, where("email" == email));
+  //   console.log(q)
+  // };
   //   const docRef = doc(db1, "pass", "email");
   //   const docSnap = getDoc(docRef);
 
@@ -44,9 +78,10 @@ const Login = () => {
 
       <TextInput
         placeholder="Enter password"
+        secureTextEntry={true}
         style={styles.input}
-        value={pass}
-        onChangeText={(txt) => setPass(txt)}
+        value={password}
+        onChangeText={(txt) => setPassword(txt)}
       />
 
       <CustomButton
@@ -54,7 +89,7 @@ const Login = () => {
         title={"Login"}
         color={"#fff"}
         onClick={() => {
-          loginUser();
+          onHandleLogin();
         }}
       />
       <Text
@@ -63,13 +98,21 @@ const Login = () => {
           navigation.navigate("Signup");
         }}
       >
-        {"Sign up"}
+        {" Don't Have Account ? Sign up"}
       </Text>
+      {/* <CustomButton
+        bg={"#E27800"}
+        title={"Login"}
+        color={"#fff"}
+        onClick={() => {
+          sendPasswordResetEmail();
+        }}
+      /> */}
     </View>
   );
-};
+}
 
-export default Login;
+// export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

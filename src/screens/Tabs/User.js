@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Header from "../../common/Header";
+import Header1 from "../../common/Header1";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { useNavigation } from "@react-navigation/native";
 
@@ -12,7 +13,11 @@ const User = () => {
   // };
   return (
     <View style={styles.container}>
-      <Header title={"Profile"} />
+      <Header1
+        title={"Profile"}
+        RightIcon={require("../../images/shopping-bag.png")}
+        isCart={true}
+      />
       <Image
         source={require("../../images/default_user.png")}
         style={styles.user}

@@ -225,9 +225,11 @@ const Checkout = () => {
           {selectedAddress}
         </Text>
         <View>
-          <TouchableHighlight
-          
-            onPress={() => {
+          <CustomButton
+            bg={'green'}
+            title={'Pay & Order'}
+            color={'#fff'}
+            onClick={() => {
               var options = {
                 description: "Credits towards consultation",
                 image: "https://i.imgur.com/3g7nmJC.png",
@@ -250,8 +252,7 @@ const Checkout = () => {
                 });
             }}
           >
-            <Text style={styles.text}>PAY</Text>
-          </TouchableHighlight>
+          </CustomButton>
         </View>
       </ScrollView>
     </View>
